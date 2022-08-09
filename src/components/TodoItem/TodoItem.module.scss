@@ -1,0 +1,6 @@
+:root:global {
+  --bg-todo: var(--color-bg-item);
+}
+.todo {
+  background-color: var(--bg-todo);
+}
