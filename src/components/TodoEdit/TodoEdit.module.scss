@@ -1,0 +1,7 @@
+:root:global {
+  --bg: var(--color-bg-edit);
+}
+.edit {
+  flex: 1;
+  background-color: var(--bg);
+}
