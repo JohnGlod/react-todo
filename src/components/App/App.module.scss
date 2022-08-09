@@ -1,0 +1,8 @@
+:root:global {
+  --color-bg: var(--color-bg-main);
+}
+
+.container {
+  background-color: var(--color-bg);
+  display: flex;
+}
