@@ -1,7 +1,14 @@
-:root:global {
-  --bg: var(--color-bg-edit);
-}
+@use "../../index.css";
+
 .edit {
-  flex: 1;
-  background-color: var(--bg);
+  flex: 1 1 70%;
+  background-color: var(--color-bg-edit);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.placeholder {
+  color: #fff;
+  max-width: 600px;
 }

@@ -1,19 +1,22 @@
-import { TodoEditProps } from './TodoEdit.props';
+import { useContext } from 'react';
+
+import { TodoContext } from '../../store/store';
+
+import { TodoItem } from '../TodoItem';
+
 import styles from './TodoEdit.module.scss';
 
-export const TodoEdit = ({ todo, onСhangeStatus }: TodoEditProps) => {
-  if (!!todo) {
-    const { text, status, complited, id } = todo;
-    return (
-      <div className={styles.edit}>
-        <div className={styles.todo}>
-          <p>{text}</p>
-          <span>{status}</span>
-          <input type='checkbox' checked={complited} />
-        </div>
-      </div>
-    );
-  } else {
-    return <div>А тут ничего нет </div>;
-  }
+export const TodoEdit = () => {
+  const { state, dispatch } = useContext(TodoContext);
+  return (
+    <div className={styles.edit}>
+      <ul className={styles.list}>
+        {!!state?.activeTodo ? (
+          <TodoItem key={state.activeTodo?.id} todo={state.activeTodo} edit />
+        ) : (
+          <li className={styles.placeholder}>Задач не выбрано...</li>
+        )}
+      </ul>
+    </div>
+  );
 };
