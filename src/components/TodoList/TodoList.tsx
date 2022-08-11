@@ -1,27 +1,28 @@
+import { useContext } from 'react';
+
+import { TodoContext } from '../../store/store';
+
 import { ITodo } from '../../model/ITodo';
+import { EActions } from '../../model/EActions';
 
 import { TodoItem } from '../TodoItem';
 
-import { TodoListProps } from './TodoList.props';
 import styles from './TodoList.module.scss';
 
-export const TodoList = ({ todoList, onEditTodo }: TodoListProps) => {
+export const TodoList = () => {
+  const { state, dispatch } = useContext(TodoContext);
   return (
     <ul className={styles.list}>
-      {!!todoList &&
-        todoList?.map(({ id, text, status, complited }: ITodo) => {
+      {!!state?.todoList &&
+        state.todoList?.map((todo: ITodo, id) => {
           return (
-            <li
+            <TodoItem
               key={id}
-              onClick={() => onEditTodo({ id, text, status, complited })}
-            >
-              <TodoItem
-                id={id}
-                text={text}
-                status={status}
-                complited={complited}
-              />
-            </li>
+              todo={todo}
+              onClick={() =>
+                dispatch && dispatch({ type: EActions.ACTIVE, payload: todo })
+              }
+            />
           );
         })}
     </ul>
