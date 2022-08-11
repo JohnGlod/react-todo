@@ -1,6 +1,74 @@
-:root:global {
-  --bg-todo: var(--color-bg-item);
-}
+@use "../../index.css";
+
 .todo {
-  background-color: var(--bg-todo);
+  padding: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  background-color: var(--color-bg-item);
+  list-style-type: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 600px;
+  gap: 25px;
+}
+
+.select {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  color: #fff;
+}
+.green {
+  background-color: rgb(6, 240, 162);
+}
+
+.blue {
+  background-color: #1426ccab;
+}
+.gray {
+  background-color: #959699;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  input {
+    padding: 10px;
+    background: none;
+    border: none;
+  }
+  .name {
+    font-weight: 700;
+  }
+}
+
+.remove {
+  width: 25px;
+  height: 25px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 800ms ease-in-out;
+  &:hover {
+    border: 1px solid var(--color-red);
+  }
+}
+
+.hidden {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.active {
+  height: auto;
+  width: auto;
+  visibility: visible;
+  opacity: 1;
 }
