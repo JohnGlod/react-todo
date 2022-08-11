@@ -1,8 +1,32 @@
-:root:global {
-  --color-bg: var(--color-bg-main);
+@use "../../index.css";
+
+.app {
+  width: 100%;
+  height: 100%;
+  padding: 30px 0;
+  min-height: 100vh;
+  background-color: var(--color-bg-main);
 }
 
 .container {
-  background-color: var(--color-bg);
   display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  padding: 0 30px;
+  gap: 50px;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 25px;
+}
+
+.TodoList {
+  display: flex;
+  padding: 25px;
+  flex-direction: column;
+  background-color: #388697;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
 }

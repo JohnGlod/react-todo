@@ -1,3 +1,5 @@
+@import-normalize;
+
 *,
 *::after,
 *::before {
@@ -5,14 +7,18 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
   --color-bg-main: #08415c;
   --color-bg-item: #ebbab9;
-  --color-bg-edit:#388697;
-
+  --color-bg-edit: #388697;
 
   --color-green: #b5ffe1;
-  --color-red:#CC2936;
+  --color-red: #cc2936;
+}
+
+li {
+  list-style: none;
 }
 
 body {

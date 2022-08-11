@@ -1,74 +1,41 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
+
+import { TodoReducer } from '../../store/reduser';
+import { initialState, TodoContext } from '../../store/store';
+
 import { TodoList } from '../TodoList';
 import { TodoEdit } from '../TodoEdit';
+import { NewTodo } from '../NewTodo';
+
+import { IContext } from '../../model/IContext';
+import { IState } from '../../model/IState';
+import { IAction } from '../../model/IAction';
+
 import styles from './App.module.scss';
-import { ITodo } from '../../model/ITodo';
-import { EStatus } from '../../model/EStatus';
+
 
 function App() {
-  const [todoList, setTodoList] = useState<ITodo[]>([
-    {
-      id: 1,
-      text: 'Реализовать добавление, редактирование и удаления заметок',
-      status: EStatus.Load,
-      complited: false,
-    },
-    {
-      id: 2,
-      text: 'Реализовать добавление, редактирование и удаления заметок',
-      status: EStatus.Load,
-      complited: false,
-    },
-    {
-      id: 3,
-      text: 'Обрезать конец наименования заметки',
-      status: EStatus.Load,
-      complited: false,
-    },
-    {
-      id: 4,
-      text: 'Реализовать добавление, редактирование и удаления заметок',
-      status: EStatus.Load,
-      complited: false,
-    },
-    {
-      id: 5,
-      text: 'Реализовать добавление, редактирование и удаления заметок',
-      status: EStatus.Load,
-      complited: false,
-    },
-  ]);
-  const [activeTodo, setActiveTodo] = useState<null | ITodo>(null);
-  const onEditTodo = (todo: ITodo) => setActiveTodo(todo);
-
-  const onСhangeStatus = (id: number, status: EStatus) => {
-    const newTodos = todoList.map((item) => {
-      if (item.id === id) {
-        const newItem = { ...item };
-
-        switch (status) {
-          case 'during':
-            newItem.status = EStatus.During;
-            break;
-          case 'finished':
-            newItem.status = EStatus.Finished;
-            break;
-          default:
-            newItem.status = EStatus.Load;
-            break;
-        }
-
-        return newItem;
-      }
-      return item;
-    });
-    setTodoList(newTodos);
+  const [state, dispatch] = useReducer<React.Reducer<IState, IAction>>(
+    TodoReducer,
+    initialState
+  );
+  const ContextState: IContext = {
+    state,
+    dispatch,
   };
-
+  console.log(state)
   return (
-    <main className={styles.container}>
-      <TodoList todoList={todoList} onEditTodo={onEditTodo} />
-      <TodoEdit onСhangeStatus={onСhangeStatus} todo={activeTodo} />
+    <main className={styles.app}>
+      <h1>My TodoList</h1>
+      <TodoContext.Provider value={ContextState}>
+        <div className={styles.container}>
+          <div className={styles.TodoList}>
+            <TodoList />
+            <NewTodo />
+          </div>
+          <TodoEdit />
+        </div>
+      </TodoContext.Provider>
     </main>
   );
 }
