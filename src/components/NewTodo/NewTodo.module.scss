@@ -9,7 +9,7 @@
 
   border-top: 2px solid #fff;
   padding-top: 20px;
-  
+
   input {
     width: 100%;
     padding: 10px;
@@ -26,6 +26,7 @@
     border: 2px solid transparent;
     color: #fff;
     cursor: pointer;
+    min-width: 200px;
     transition: all 400ms ease-in-out;
     &:hover {
       border: 2px solid var(--color-red);

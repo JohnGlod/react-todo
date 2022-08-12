@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-
 import { TodoContext } from '../../store/store';
 
 import { ITodo } from '../../model/ITodo';
