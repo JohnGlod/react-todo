@@ -1,5 +1,6 @@
-import React, { useReducer, useEffect, useRef } from 'react';
+import React, { useReducer, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
+
 import { TodoReducer } from '../../store/reduser';
 import { initialState, TodoContext } from '../../store/store';
 
@@ -7,6 +8,7 @@ import { TodoList } from '../TodoList';
 import { TodoEdit } from '../TodoEdit';
 import { NewTodo } from '../NewTodo';
 
+import { ITodo } from '../../model/ITodo';
 import { IContext } from '../../model/IContext';
 import { IState } from '../../model/IState';
 import { IAction } from '../../model/IAction';
@@ -25,6 +27,23 @@ function App() {
 
   const ref = useRef<HTMLDivElement | null>(null);
   const refRight = useRef<HTMLDivElement | null>(null);
+
+  const [search, setSearch] = useState<string>('');
+  const [result, setResult] = useState<ITodo[] | undefined>(undefined);
+
+  const handleSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const enteredName = event.target.value;
+    setSearch(enteredName);
+  };
+
+  const searchTodos = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event?.key === 'Enter') {
+      const foundItems = state.todoList.filter((item: ITodo) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+      setResult(foundItems);
+    }
+  };
 
   useEffect(() => {
     const resizeableElem = ref.current as HTMLDivElement;
@@ -77,7 +96,16 @@ function App() {
         <div className={styles.container}>
           <div className={cn(styles.TodoList, styles.resizeable)} ref={ref}>
             <div className={styles.resizeableRight} ref={refRight} />
-            <TodoList />
+            <input
+              className={styles.search}
+              type='search'
+              name='search'
+              onChange={handleSearchValue}
+              placeholder='Найти todo'
+              onKeyDown={searchTodos}
+              id='search'
+            />
+            <TodoList todos={!!result ? result : state.todoList} />
             <NewTodo />
           </div>
           <TodoEdit />
