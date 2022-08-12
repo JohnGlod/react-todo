@@ -10,7 +10,7 @@ import { TodoItemProps } from './TodoItem.props';
 
 import styles from './TodoItem.module.scss';
 
-export const TodoItem = ({ todo, edit = false, onClick }: TodoItemProps) => {
+export const TodoItem = ({ todo, edit = false }: TodoItemProps) => {
   const { text, status, complited, name } = todo;
   const { state, dispatch } = useContext(TodoContext);
 
@@ -33,7 +33,7 @@ export const TodoItem = ({ todo, edit = false, onClick }: TodoItemProps) => {
         case 'name':
           dispatch({ type: EActions.NAME, payload: event.target.value });
           break;
-        case 'check':
+        case 'checkbox':
           dispatch({ type: EActions.CHECKED, payload: todo });
           dispatch({ type: EActions.ACTIVE, payload: null });
           break;
@@ -43,18 +43,29 @@ export const TodoItem = ({ todo, edit = false, onClick }: TodoItemProps) => {
       }
     }
   };
+  
   return (
-    <li className={styles.todo} onClick={onClick}>
+    <li
+      className={styles.todo}
+      onClick={
+        !edit
+          ? () => {
+              dispatch && dispatch({ type: EActions.ACTIVE, payload: todo });
+            }
+          : () => {}
+      }
+    >
       {edit && (
         <div className='checkbox'>
-          <input
-            name='check'
-            id='#checkbox'
-            type='checkbox'
-            checked={complited}
-            onChange={handleInputChange}
-          />
-          <label htmlFor='checkbox'></label>
+          <label htmlFor='checkbox' className={styles.label}>
+            <input
+              className={styles.checkbox}
+              name='checkbox'
+              type='checkbox'
+              checked={complited}
+              onChange={handleInputChange}
+            />
+          </label>
         </div>
       )}
       <div className={styles.text}>
