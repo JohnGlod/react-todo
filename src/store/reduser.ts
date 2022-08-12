@@ -87,13 +87,6 @@ export const TodoReducer = (state: IState, action: IAction): IState => {
           }),
         ],
       };
-
-    case EActions.CHANGE:
-      return {
-        ...state,
-        newTodo: action.payload,
-      };
-
     default:
       return state;
   }

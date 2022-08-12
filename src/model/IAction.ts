@@ -1,6 +1,5 @@
 import { EActions } from './EActions';
 import { ITodo } from './ITodo';
-
 interface ActionStringPayload {
   type: EActions.STATUS | EActions.TEXT | EActions.NAME;
   payload: string;
@@ -11,11 +10,6 @@ interface ActionObjectPayload {
   payload: ITodo;
 }
 
-interface ActionObjectNewItemPayload {
-  type: EActions.CHANGE;
-  payload: { name: string; text: string };
-}
-
 interface ActionActiveTodoPayload {
   type: EActions.ACTIVE;
   payload: ITodo | null;
@@ -24,5 +18,4 @@ interface ActionActiveTodoPayload {
 export type IAction =
   | ActionStringPayload
   | ActionObjectPayload
-  | ActionObjectNewItemPayload
   | ActionActiveTodoPayload;

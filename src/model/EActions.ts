@@ -6,5 +6,4 @@ export enum EActions {
   CHECKED = 'TOGGLE_CHECKED',
   TEXT = 'EDIT_TEXT',
   NAME = 'EDIT_NAME',
-  CHANGE = 'CHANGE_NEW_TODO'
 }
